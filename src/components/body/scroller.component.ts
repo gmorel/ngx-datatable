@@ -3,8 +3,6 @@ import {
   OnInit, OnDestroy, HostBinding, ChangeDetectionStrategy
 } from '@angular/core';
 
-import { mouseEvent } from '../../events';
-
 @Component({
   selector: 'datatable-scroller',
   template: `
@@ -75,6 +73,24 @@ export class ScrollerComponent implements OnInit, OnDestroy {
       direction = 'down';
     } else if (this.scrollYPos > this.prevScrollYPos) {
       direction = 'up';
+    }
+
+    this.scroll.emit({
+      direction,
+      scrollYPos: this.scrollYPos,
+      scrollXPos: this.scrollXPos
+    });
+
+    this.prevScrollYPos = this.scrollYPos;
+    this.prevScrollXPos = this.scrollXPos;
+  }
+
+  scrollHorizontally(scrollXPos: number): void {
+    let direction: string;
+    if (scrollXPos < this.prevScrollXPos) {
+      direction = 'left';
+    } else if (scrollXPos > this.prevScrollXPos) {
+      direction = 'right';
     }
 
     this.scroll.emit({

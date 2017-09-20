@@ -19,4 +19,5 @@ export declare class ScrollerComponent implements OnInit, OnDestroy {
     setOffset(offsetY: number): void;
     onScrolled(event: MouseEvent): void;
     updateOffset(): void;
+    scrollHorizontally(scrollXPos: number): void;
 }
