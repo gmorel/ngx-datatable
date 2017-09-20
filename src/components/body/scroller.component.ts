@@ -85,13 +85,15 @@ export class ScrollerComponent implements OnInit, OnDestroy {
     this.prevScrollXPos = this.scrollXPos;
   }
 
-  scrollHorizontally(scrollXPos: number): void {
-    let direction: string;
-    if (scrollXPos < this.prevScrollXPos) {
-      direction = 'left';
-    } else if (scrollXPos > this.prevScrollXPos) {
-      direction = 'right';
-    }
+  scrollHorizontally(scrollXDistance: number): void {
+    let direction = '';
+    // let direction: string;
+    // if (scrollXPos < this.prevScrollXPos) {
+    // } else if (scrollXPos > this.prevScrollXPos) {
+    //   direction = 'right';
+    // }
+
+    this.scrollXPos += scrollXDistance;
 
     this.scroll.emit({
       direction,
@@ -99,8 +101,9 @@ export class ScrollerComponent implements OnInit, OnDestroy {
       scrollXPos: this.scrollXPos
     });
 
-    this.prevScrollYPos = this.scrollYPos;
     this.prevScrollXPos = this.scrollXPos;
+
+    requestAnimationFrame(this.updateOffset.bind(this));
   }
 
 }
