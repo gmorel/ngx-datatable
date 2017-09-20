@@ -52,6 +52,22 @@ var ScrollerComponent = /** @class */ (function () {
         this.prevScrollYPos = this.scrollYPos;
         this.prevScrollXPos = this.scrollXPos;
     };
+    ScrollerComponent.prototype.scrollHorizontally = function (scrollXPos) {
+        var direction;
+        if (scrollXPos < this.prevScrollXPos) {
+            direction = 'left';
+        }
+        else if (scrollXPos > this.prevScrollXPos) {
+            direction = 'right';
+        }
+        this.scroll.emit({
+            direction: direction,
+            scrollYPos: this.scrollYPos,
+            scrollXPos: this.scrollXPos
+        });
+        this.prevScrollYPos = this.scrollYPos;
+        this.prevScrollXPos = this.scrollXPos;
+    };
     ScrollerComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'datatable-scroller',
